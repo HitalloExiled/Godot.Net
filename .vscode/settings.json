@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        "**/.editorconfig": true,
+        "**/.gitignore": true,
+        "**/bin": true,
+        "**/obj": true
+    },
+    "cSpell.enabled": true
+}
