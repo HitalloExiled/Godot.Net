@@ -1,0 +1,14 @@
+namespace Godot.Net.Servers;
+
+public partial class TextServer
+{
+    public enum FontLCDSubpixelLayout
+    {
+		FONT_LCD_SUBPIXEL_LAYOUT_NONE,
+		FONT_LCD_SUBPIXEL_LAYOUT_HRGB,
+		FONT_LCD_SUBPIXEL_LAYOUT_HBGR,
+		FONT_LCD_SUBPIXEL_LAYOUT_VRGB,
+		FONT_LCD_SUBPIXEL_LAYOUT_VBGR,
+		FONT_LCD_SUBPIXEL_LAYOUT_MAX,
+	}
+}

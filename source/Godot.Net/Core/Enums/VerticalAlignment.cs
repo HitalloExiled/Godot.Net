@@ -1,0 +1,9 @@
+namespace Godot.Net.Core.Enums;
+
+public enum VerticalAlignment
+{
+    VERTICAL_ALIGNMENT_TOP,
+	VERTICAL_ALIGNMENT_CENTER,
+	VERTICAL_ALIGNMENT_BOTTOM,
+	VERTICAL_ALIGNMENT_FILL,
+}

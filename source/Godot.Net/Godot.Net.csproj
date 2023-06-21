@@ -1,12 +1,35 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Age</RootNamespace>
+    <RootNamespace>Godot.Net</RootNamespace>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PublishAot>true</PublishAot>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IlcDisableReflection>true</IlcDisableReflection>
   </PropertyGroup>
-
+  <ItemGroup>
+    <AdditionalFiles Include="**/*.glsl" />
+    <AdditionalFiles Include="**/*.generated" />
+  </ItemGroup>
+  <ItemGroup>
+    <TrimmableAssembly Include="Silk.NET.Maths" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Godot.Net.SourceGenerators\Godot.Net.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="68.2.0.9" />
+    <PackageReference Include="Silk.NET.Vulkan" Version="2.17.1" />
+    <PackageReference Include="Silk.NET.Vulkan.Extensions.EXT" Version="2.17.1" />
+    <PackageReference Include="Silk.NET.Vulkan.Extensions.KHR" Version="2.17.1" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.3" />
+    <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="./ThirdParty/Fonts/*" CopyToOutputDirectory="PreserveNewest" TargetPath="Assets/Fonts/%(Filename)%(Extension)" />
+    <None Include="./Scene/Resources/DefaultTheme/*.svg" CopyToOutputDirectory="PreserveNewest" TargetPath="Assets/DefaultTheme/Icons/%(Filename)%(Extension)" />
+    <None Include="./Editor/Icons/*.svg" CopyToOutputDirectory="PreserveNewest" TargetPath="Assets/Editor/Icons/%(Filename)%(Extension)" />
+  </ItemGroup>
 </Project>

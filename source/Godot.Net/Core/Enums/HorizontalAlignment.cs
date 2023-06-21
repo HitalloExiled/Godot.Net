@@ -1,0 +1,9 @@
+namespace Godot.Net.Core.Enums;
+
+public enum HorizontalAlignment
+{
+    HORIZONTAL_ALIGNMENT_LEFT,
+	HORIZONTAL_ALIGNMENT_CENTER,
+	HORIZONTAL_ALIGNMENT_RIGHT,
+	HORIZONTAL_ALIGNMENT_FILL,
+}

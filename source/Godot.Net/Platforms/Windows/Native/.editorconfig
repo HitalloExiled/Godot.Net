@@ -1,0 +1,8 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = false
+
+[*.cs]
+dotnet_naming_rule.public_fields_rule.severity = none
+dotnet_diagnostic.CA1707.severity              = none

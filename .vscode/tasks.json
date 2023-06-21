@@ -19,9 +19,18 @@
             "type": "process",
             "args": [
                 "clean",
-                "${workspaceFolder}/Godot.Net.sln",
+                "${workspaceFolder}/Godot.Net.sln"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "rebuild",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "clean",
+                "build"
+            ],
+            "problemMatcher": []
         },
         {
             "label": "publish",
@@ -31,7 +40,7 @@
                 "publish",
                 "${workspaceFolder}/Godot.Net.sln",
                 "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary",
+                "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },

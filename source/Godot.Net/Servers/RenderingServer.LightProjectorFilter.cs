@@ -1,0 +1,13 @@
+namespace Godot.Net.Servers;
+public abstract partial class RenderingServer
+{
+    public enum LightProjectorFilter
+    {
+        LIGHT_PROJECTOR_FILTER_NEAREST,
+        LIGHT_PROJECTOR_FILTER_LINEAR,
+        LIGHT_PROJECTOR_FILTER_NEAREST_MIPMAPS,
+        LIGHT_PROJECTOR_FILTER_LINEAR_MIPMAPS,
+        LIGHT_PROJECTOR_FILTER_NEAREST_MIPMAPS_ANISOTROPIC,
+        LIGHT_PROJECTOR_FILTER_LINEAR_MIPMAPS_ANISOTROPIC,
+    };
+}

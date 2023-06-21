@@ -1,0 +1,29 @@
+namespace Godot.Net.Servers;
+
+public abstract partial class DisplayServer
+{
+    public enum Feature
+    {
+        FEATURE_GLOBAL_MENU,
+        FEATURE_SUBWINDOWS,
+        FEATURE_TOUCHSCREEN,
+        FEATURE_MOUSE,
+        FEATURE_MOUSE_WARP,
+        FEATURE_CLIPBOARD,
+        FEATURE_VIRTUAL_KEYBOARD,
+        FEATURE_CURSOR_SHAPE,
+        FEATURE_CUSTOM_CURSOR_SHAPE,
+        FEATURE_NATIVE_DIALOG,
+        FEATURE_IME,
+        FEATURE_WINDOW_TRANSPARENCY,
+        FEATURE_HIDPI,
+        FEATURE_ICON,
+        FEATURE_NATIVE_ICON,
+        FEATURE_ORIENTATION,
+        FEATURE_SWAP_BUFFERS,
+        FEATURE_KEEP_SCREEN_ON,
+        FEATURE_CLIPBOARD_PRIMARY,
+        FEATURE_TEXT_TO_SPEECH,
+        FEATURE_EXTEND_TO_TITLE,
+    };
+}

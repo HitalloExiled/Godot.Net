@@ -1,0 +1,17 @@
+namespace Godot.Net.Scene.Main;
+#pragma warning disable IDE0052, IDE0044, CS0414, CS0649 // TODO Remover
+
+public partial class CanvasItem
+{
+    public enum TextureFilter
+    {
+        TEXTURE_FILTER_PARENT_NODE,
+        TEXTURE_FILTER_NEAREST,
+        TEXTURE_FILTER_LINEAR,
+        TEXTURE_FILTER_NEAREST_WITH_MIPMAPS,
+        TEXTURE_FILTER_LINEAR_WITH_MIPMAPS,
+        TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC,
+        TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC,
+        TEXTURE_FILTER_MAX
+    }
+}

@@ -1,9 +1,13 @@
 {
     "files.exclude": {
-        "**/.editorconfig": true,
         "**/.gitignore": true,
         "**/bin": true,
         "**/obj": true
     },
-    "cSpell.enabled": true
+    "explorer.fileNesting.patterns": {
+        "*.cs": "${capture}.*.cs"
+    },
+    "omnisharp.enableAsyncCompletion": true,
+    "csharpextensions.useFileScopedNamespace": true,
+    "dotnet.server.useOmnisharp": true,
 }

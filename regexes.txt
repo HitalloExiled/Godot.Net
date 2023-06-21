@@ -1,0 +1,4 @@
+(?<!")\b[a-z]+(_[a-z]+)+\b(?!") # Locate snake_case outside strings
+(?<!("|\W))\b[a-z]+(_[a-z]+)+\b(?!("|\W)) # Locate snake_case outside strings with paths
+"[A-Z]?[a-z]+([A-Z][a-z]+)+" # Pascal or camel keys inside Strings
+var\s+\b[a-z]+(_[a-z0-9]+)+\b

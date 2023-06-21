@@ -1,0 +1,82 @@
+Can you help me to format the code that i will provide following rules?:
+
+<rules>
+Groups must be ordered alphabetically by the identifiers
+TypeNames must be aligned vertically
+Identifiers must be aligned vertically
+Getter and Setters must be aligned vertically
+Implementations must not be changed
+</rules>
+
+<groups>
+private   const
+protected const
+public    const
+
+private   delegate
+protected delegate
+public    delegate
+
+private   static readonly fields
+protected static readonly fields
+public    static readonly fields
+
+private   static fields
+protected static fields
+public    static fields
+
+private   static properties
+protected static properties
+public    static properties
+
+private   readonly fields
+protected readonly fields
+public    readonly fields
+
+private   fields
+protected fields
+public    fields
+
+private   abstract properties
+protected abstract properties
+public    abstract properties
+
+private   properties
+protected properties
+public    properties
+
+private   virtual properties
+protected virtual properties
+public    virtual properties
+
+private   events
+protected events
+public    events
+
+private   constructors
+protected constructors
+public    constructors
+
+desconstructors
+
+private   static methods
+protected static methods
+public    static methods
+
+private   abstract methods
+protected abstract methods
+public    abstract methods
+
+private   virtual methods
+protected virtual methods
+public    virtual methods
+
+private   override methods
+protected override methods
+public    override methods
+
+private   methods
+protected methods
+public    methods
+</groups>
+

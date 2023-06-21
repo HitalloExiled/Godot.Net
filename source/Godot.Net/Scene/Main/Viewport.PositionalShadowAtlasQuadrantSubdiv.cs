@@ -1,0 +1,16 @@
+namespace Godot.Net.Scene.Main;
+
+public partial class Viewport
+{
+    public enum PositionalShadowAtlasQuadrantSubdiv
+    {
+        SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED,
+        SHADOW_ATLAS_QUADRANT_SUBDIV_1,
+        SHADOW_ATLAS_QUADRANT_SUBDIV_4,
+        SHADOW_ATLAS_QUADRANT_SUBDIV_16,
+        SHADOW_ATLAS_QUADRANT_SUBDIV_64,
+        SHADOW_ATLAS_QUADRANT_SUBDIV_256,
+        SHADOW_ATLAS_QUADRANT_SUBDIV_1024,
+        SHADOW_ATLAS_QUADRANT_SUBDIV_MAX,
+    }
+}

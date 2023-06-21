@@ -1,2 +1,8 @@
-﻿Console.WriteLine("Here we go again...");
-Console.ReadKey();
+﻿using Godot.Net.Platforms.Windows;
+// Icu.Wrapper.Init();
+// Godot.Net.ProgramTest.Run();
+GodotWindows.Initialize(args);
+
+// Icu.Wrapper.Cleanup();
+
+
