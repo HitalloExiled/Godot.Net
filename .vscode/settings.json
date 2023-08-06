@@ -10,4 +10,8 @@
     "omnisharp.enableAsyncCompletion": true,
     "csharpextensions.useFileScopedNamespace": true,
     "dotnet.server.useOmnisharp": true,
+    "files.associations": {
+        // "*.cs.txt": "csharp"
+    },
+    "dotnet-test-explorer.testProjectPath": "**/*.Tests",
 }

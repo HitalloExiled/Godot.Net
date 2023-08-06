@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <RootNamespace>Godot.Net</RootNamespace>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PublishAot>true</PublishAot>
@@ -11,7 +11,7 @@
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="**/*.glsl" />
-    <AdditionalFiles Include="**/*.generated" />
+    <AdditionalFiles Include="**/*.generate" />
   </ItemGroup>
   <ItemGroup>
     <TrimmableAssembly Include="Silk.NET.Maths" />

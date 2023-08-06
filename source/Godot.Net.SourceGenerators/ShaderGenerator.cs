@@ -9,8 +9,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 
-#pragma warning disable RS1036 // Bugged
-
 [Generator]
 public class ShaderGenerator : ISourceGenerator
 {
@@ -768,7 +766,7 @@ public class ShaderGenerator : ISourceGenerator
             {
                 files.Add(file.Path, file);
             }
-            else if (Path.GetExtension(file.Path) == ".generated")
+            else if (Path.GetExtension(file.Path) == ".generate")
             {
                 scopes.Add(Path.GetDirectoryName(file.Path), file.GetText()!.Lines.Select(x => x.ToString()).ToImmutableHashSet());
             }
