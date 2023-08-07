@@ -12,15 +12,8 @@ using Godot.Net.Extensions;
 
 public partial class ShaderLanguage
 {
-    private enum Case
-    {
-        CASE_ALL,
-        CASE_HEXA_PERIOD,
-        CASE_EXPONENT,
-        CASE_SIGN_AFTER_EXPONENT,
-        CASE_NONE,
-        CASE_MAX,
-    }
+    private const ContextFlag KCF_DATATYPE         = ContextFlag.CF_BLOCK | ContextFlag.CF_GLOBAL_SPACE | ContextFlag.CF_DATATYPE | ContextFlag.CF_FUNC_DECL_PARAM_TYPE | ContextFlag.CF_UNIFORM_TYPE;
+    private const ContextFlag KCF_SAMPLER_DATATYPE = ContextFlag.CF_FUNC_DECL_PARAM_TYPE | ContextFlag.CF_UNIFORM_TYPE;
 
     public delegate DataType GlobalShaderUniformGetTypeFunc(string name);
 
@@ -80,9 +73,6 @@ public partial class ShaderLanguage
         1,
     };
 
-    private static readonly ContextFlag kcfDatatype          = ContextFlag.CF_BLOCK | ContextFlag.CF_GLOBAL_SPACE | ContextFlag.CF_DATATYPE | ContextFlag.CF_FUNC_DECL_PARAM_TYPE | ContextFlag.CF_UNIFORM_TYPE;
-    private static readonly ContextFlag kcfSamplerDatatype   = ContextFlag.CF_FUNC_DECL_PARAM_TYPE | ContextFlag.CF_UNIFORM_TYPE;
-
     private static readonly Dictionary<string, KeyWord> keywordList = new()
     {
         { "true",  new(TokenType.TK_TRUE,  "true",  ContextFlag.CF_BLOCK | ContextFlag.CF_IF_DECL | ContextFlag.CF_BOOLEAN) },
@@ -91,36 +81,36 @@ public partial class ShaderLanguage
         // data types
 
         { "void",             new(TokenType.TK_TYPE_VOID,             "void",             ContextFlag.CF_GLOBAL_SPACE) },
-        { "bool",             new(TokenType.TK_TYPE_BOOL,             "bool",             kcfDatatype) },
-        { "bvec2",            new(TokenType.TK_TYPE_BVEC2,            "bvec2",            kcfDatatype) },
-        { "bvec3",            new(TokenType.TK_TYPE_BVEC3,            "bvec3",            kcfDatatype) },
-        { "bvec4",            new(TokenType.TK_TYPE_BVEC4,            "bvec4",            kcfDatatype) },
-        { "int",              new(TokenType.TK_TYPE_INT,              "int",              kcfDatatype) },
-        { "ivec2",            new(TokenType.TK_TYPE_IVEC2,            "ivec2",            kcfDatatype) },
-        { "ivec3",            new(TokenType.TK_TYPE_IVEC3,            "ivec3",            kcfDatatype) },
-        { "ivec4",            new(TokenType.TK_TYPE_IVEC4,            "ivec4",            kcfDatatype) },
-        { "uint",             new(TokenType.TK_TYPE_UINT,             "uint",             kcfDatatype) },
-        { "uvec2",            new(TokenType.TK_TYPE_UVEC2,            "uvec2",            kcfDatatype) },
-        { "uvec3",            new(TokenType.TK_TYPE_UVEC3,            "uvec3",            kcfDatatype) },
-        { "uvec4",            new(TokenType.TK_TYPE_UVEC4,            "uvec4",            kcfDatatype) },
-        { "float",            new(TokenType.TK_TYPE_FLOAT,            "float",            kcfDatatype | ContextFlag.CF_VARYING_TYPE) },
-        { "vec2",             new(TokenType.TK_TYPE_VEC2,             "vec2",             kcfDatatype | ContextFlag.CF_VARYING_TYPE) },
-        { "vec3",             new(TokenType.TK_TYPE_VEC3,             "vec3",             kcfDatatype | ContextFlag.CF_VARYING_TYPE) },
-        { "vec4",             new(TokenType.TK_TYPE_VEC4,             "vec4",             kcfDatatype | ContextFlag.CF_VARYING_TYPE) },
-        { "mat2",             new(TokenType.TK_TYPE_MAT2,             "mat2",             kcfDatatype | ContextFlag.CF_VARYING_TYPE) },
-        { "mat3",             new(TokenType.TK_TYPE_MAT3,             "mat3",             kcfDatatype | ContextFlag.CF_VARYING_TYPE) },
-        { "mat4",             new(TokenType.TK_TYPE_MAT4,             "mat4",             kcfDatatype | ContextFlag.CF_VARYING_TYPE) },
-        { "sampler2D",        new(TokenType.TK_TYPE_SAMPLER2D,        "sampler2D",        kcfSamplerDatatype) },
-        { "isampler2D",       new(TokenType.TK_TYPE_ISAMPLER2D,       "isampler2D",       kcfSamplerDatatype) },
-        { "usampler2D",       new(TokenType.TK_TYPE_USAMPLER2D,       "usampler2D",       kcfSamplerDatatype) },
-        { "sampler2DArray",   new(TokenType.TK_TYPE_SAMPLER2DARRAY,   "sampler2DArray",   kcfSamplerDatatype) },
-        { "isampler2DArray",  new(TokenType.TK_TYPE_ISAMPLER2DARRAY,  "isampler2DArray",  kcfSamplerDatatype) },
-        { "usampler2DArray",  new(TokenType.TK_TYPE_USAMPLER2DARRAY,  "usampler2DArray",  kcfSamplerDatatype) },
-        { "sampler3D",        new(TokenType.TK_TYPE_SAMPLER3D,        "sampler3D",        kcfSamplerDatatype) },
-        { "isampler3D",       new(TokenType.TK_TYPE_ISAMPLER3D,       "isampler3D",       kcfSamplerDatatype) },
-        { "usampler3D",       new(TokenType.TK_TYPE_USAMPLER3D,       "usampler3D",       kcfSamplerDatatype) },
-        { "samplerCube",      new(TokenType.TK_TYPE_SAMPLERCUBE,      "samplerCube",      kcfSamplerDatatype) },
-        { "samplerCubeArray", new(TokenType.TK_TYPE_SAMPLERCUBEARRAY, "samplerCubeArray", kcfSamplerDatatype) },
+        { "bool",             new(TokenType.TK_TYPE_BOOL,             "bool",             KCF_DATATYPE) },
+        { "bvec2",            new(TokenType.TK_TYPE_BVEC2,            "bvec2",            KCF_DATATYPE) },
+        { "bvec3",            new(TokenType.TK_TYPE_BVEC3,            "bvec3",            KCF_DATATYPE) },
+        { "bvec4",            new(TokenType.TK_TYPE_BVEC4,            "bvec4",            KCF_DATATYPE) },
+        { "int",              new(TokenType.TK_TYPE_INT,              "int",              KCF_DATATYPE) },
+        { "ivec2",            new(TokenType.TK_TYPE_IVEC2,            "ivec2",            KCF_DATATYPE) },
+        { "ivec3",            new(TokenType.TK_TYPE_IVEC3,            "ivec3",            KCF_DATATYPE) },
+        { "ivec4",            new(TokenType.TK_TYPE_IVEC4,            "ivec4",            KCF_DATATYPE) },
+        { "uint",             new(TokenType.TK_TYPE_UINT,             "uint",             KCF_DATATYPE) },
+        { "uvec2",            new(TokenType.TK_TYPE_UVEC2,            "uvec2",            KCF_DATATYPE) },
+        { "uvec3",            new(TokenType.TK_TYPE_UVEC3,            "uvec3",            KCF_DATATYPE) },
+        { "uvec4",            new(TokenType.TK_TYPE_UVEC4,            "uvec4",            KCF_DATATYPE) },
+        { "float",            new(TokenType.TK_TYPE_FLOAT,            "float",            KCF_DATATYPE | ContextFlag.CF_VARYING_TYPE) },
+        { "vec2",             new(TokenType.TK_TYPE_VEC2,             "vec2",             KCF_DATATYPE | ContextFlag.CF_VARYING_TYPE) },
+        { "vec3",             new(TokenType.TK_TYPE_VEC3,             "vec3",             KCF_DATATYPE | ContextFlag.CF_VARYING_TYPE) },
+        { "vec4",             new(TokenType.TK_TYPE_VEC4,             "vec4",             KCF_DATATYPE | ContextFlag.CF_VARYING_TYPE) },
+        { "mat2",             new(TokenType.TK_TYPE_MAT2,             "mat2",             KCF_DATATYPE | ContextFlag.CF_VARYING_TYPE) },
+        { "mat3",             new(TokenType.TK_TYPE_MAT3,             "mat3",             KCF_DATATYPE | ContextFlag.CF_VARYING_TYPE) },
+        { "mat4",             new(TokenType.TK_TYPE_MAT4,             "mat4",             KCF_DATATYPE | ContextFlag.CF_VARYING_TYPE) },
+        { "sampler2D",        new(TokenType.TK_TYPE_SAMPLER2D,        "sampler2D",        KCF_SAMPLER_DATATYPE) },
+        { "isampler2D",       new(TokenType.TK_TYPE_ISAMPLER2D,       "isampler2D",       KCF_SAMPLER_DATATYPE) },
+        { "usampler2D",       new(TokenType.TK_TYPE_USAMPLER2D,       "usampler2D",       KCF_SAMPLER_DATATYPE) },
+        { "sampler2DArray",   new(TokenType.TK_TYPE_SAMPLER2DARRAY,   "sampler2DArray",   KCF_SAMPLER_DATATYPE) },
+        { "isampler2DArray",  new(TokenType.TK_TYPE_ISAMPLER2DARRAY,  "isampler2DArray",  KCF_SAMPLER_DATATYPE) },
+        { "usampler2DArray",  new(TokenType.TK_TYPE_USAMPLER2DARRAY,  "usampler2DArray",  KCF_SAMPLER_DATATYPE) },
+        { "sampler3D",        new(TokenType.TK_TYPE_SAMPLER3D,        "sampler3D",        KCF_SAMPLER_DATATYPE) },
+        { "isampler3D",       new(TokenType.TK_TYPE_ISAMPLER3D,       "isampler3D",       KCF_SAMPLER_DATATYPE) },
+        { "usampler3D",       new(TokenType.TK_TYPE_USAMPLER3D,       "usampler3D",       KCF_SAMPLER_DATATYPE) },
+        { "samplerCube",      new(TokenType.TK_TYPE_SAMPLERCUBE,      "samplerCube",      KCF_SAMPLER_DATATYPE) },
+        { "samplerCubeArray", new(TokenType.TK_TYPE_SAMPLERCUBEARRAY, "samplerCubeArray", KCF_SAMPLER_DATATYPE) },
 
         // interpolation qualifiers
 
@@ -2552,7 +2542,7 @@ public partial class ShaderLanguage
                                     if (flow.Expressions[0].Type == Node.NodeType.TYPE_CONSTANT)
                                     {
                                         var cn = (ConstantNode)flow.Expressions[0];
-                                        if (cn == null || !cn.Values.Any())
+                                        if (cn == null || cn.Values.Count == 0)
                                         {
                                             return Error.ERR_PARSE_ERROR;
                                         }
@@ -3977,7 +3967,7 @@ public partial class ShaderLanguage
                                 var cnode = indexExpression as ConstantNode;
                                 if (cnode != null)
                                 {
-                                    if (cnode.Values.Any())
+                                    if (cnode.Values.Count != 0)
                                     {
                                         var value = cnode.Values[0].Sint;
                                         if (value < 0 || value >= arraySize)
@@ -4594,7 +4584,7 @@ public partial class ShaderLanguage
                                 var cnode = indexExpression as ConstantNode;
                                 if (cnode != null)
                                 {
-                                    if (cnode.Values.Any())
+                                    if (cnode.Values.Count != 0)
                                     {
                                         var value = cnode.Values[0].Sint;
                                         if (value < 0 || value >= arraySize)
@@ -5520,7 +5510,7 @@ public partial class ShaderLanguage
 
                                     if (smode.StartsWith(name))
                                     {
-                                        if (info.Options.Any())
+                                        if (info.Options.Count != 0)
                                         {
                                             if (info.Options.Contains(smode[(name.Length + 1)..]))
                                             {
@@ -5553,7 +5543,7 @@ public partial class ShaderLanguage
 
                                 if (smode.StartsWith(name))
                                 {
-                                    if (info.Options.Any())
+                                    if (info.Options.Count != 0)
                                     {
                                         if (info.Options.Contains(smode[(name.Length + 1)..]))
                                         {
@@ -7248,9 +7238,9 @@ public partial class ShaderLanguage
                         }
 
                         var builtins = new FunctionInfo();
-                        if (functions.ContainsKey(name))
+                        if (functions.TryGetValue(name, out var namedFunctions))
                         {
-                            builtins = functions[name];
+                            builtins = namedFunctions;
                         }
 
                         if (functions.TryGetValue("global", out var globalFunctions))
@@ -7605,7 +7595,7 @@ public partial class ShaderLanguage
                         if (functions.ContainsKey(name))
                         {
                             //if one of the core functions, make sure they are of the correct form
-                            if (funcNode.Arguments.Any())
+                            if (funcNode.Arguments.Count != 0)
                             {
                                 this.SetError(string.Format(RTR("Function '{0}' expects no arguments."), name));
                                 return Error.ERR_PARSE_ERROR;
@@ -8355,7 +8345,7 @@ public partial class ShaderLanguage
 
             var pfunc          = fn.FunctionNode;
             var pfuncArguments = pfunc.Arguments.Values.OrderBy(x => x.Index).ToArray();
-            if (!argList.Any())
+            if (argList.Length == 0)
             {
                 for (var j = 0; j < pfuncArguments.Length; j++)
                 {
