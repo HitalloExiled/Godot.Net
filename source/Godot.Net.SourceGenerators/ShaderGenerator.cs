@@ -162,7 +162,7 @@ public class ShaderGenerator : ISourceGenerator
 
             foreach (var x in ast.Uniforms)
             {
-                code.WriteLine("\"" + x + "\",");
+                code.WriteLine($"\"{x}\",");
             }
 
             closeBlock(true); // uniformStrings
@@ -181,7 +181,7 @@ public class ShaderGenerator : ISourceGenerator
 
             foreach (var x in ast.VariantDefines)
             {
-                code.WriteLine("\"" + x + "\",");
+                code.WriteLine($"\"{x}\",");
             }
 
             closeBlock(true); // variantDefines
@@ -193,14 +193,14 @@ public class ShaderGenerator : ISourceGenerator
             code.NewLine();
         }
 
-        if (ast.Texunits.Any())
+        if (ast.TexUnits.Any())
         {
             code.WriteLine("var texunitPairs = new TexUnitPair[]");
             openBlock();
 
-            foreach (var x in ast.Texunits)
+            foreach (var (name, value) in ast.TexUnits)
             {
-                code.WriteLine("{\"" + x[0] + "\"," + x[1] + "},");
+                code.WriteLine($"new(\"{name}\", {value}),");
             }
 
             closeBlock(true); // texunitPairs
@@ -217,9 +217,9 @@ public class ShaderGenerator : ISourceGenerator
             code.WriteLine("var uboPairs = new UBOPair[]");
             openBlock();
 
-            foreach (var x in ast.Ubos)
+            foreach (var (name, value) in ast.Ubos)
             {
-                code.WriteLine("{\"" + x[0] + "\"," + x[1] + "},");
+                code.WriteLine($"new(\"{name}\", {value}),");
             }
 
             closeBlock(true); // uboPairs
@@ -243,7 +243,7 @@ public class ShaderGenerator : ISourceGenerator
                 var defval = ast.SpecializationValues[i].Trim();
                 defval = defval.ToUpper() == "TRUE" || defval == "1" ? "true" : "false";
 
-                code.WriteLine("new(\"" + ast.SpecializationNames[i] + "\", " + defval + "),");
+                code.WriteLine($"new(\"{ast.SpecializationNames[i]}\", {defval}),");
 
                 specializationsFound.Add(ast.SpecializationNames[i]);
             }
@@ -272,7 +272,7 @@ public class ShaderGenerator : ISourceGenerator
                 }
                 else
                 {
-                    code.WriteLine("{\"" + name + "\",0},");
+                    code.WriteLine("{\"" + name + "\", 0},");
                 }
 
                 feedbackCount += 1;
@@ -645,10 +645,9 @@ public class ShaderGenerator : ISourceGenerator
                         x = x.Substring(0, x.IndexOf('['));
                     }
 
-                    if (ast.TexunitNames.Contains(x))
+                    if (!ast.TexunitNames.Contains(x))
                     {
-                        ast.Texunits.Add(x);
-                        ast.Texunits.Add(texunit);
+                        ast.TexUnits.Add((x, texunit));
                         ast.TexunitNames.Add(x);
                     }
                 }
@@ -676,10 +675,9 @@ public class ShaderGenerator : ISourceGenerator
                         x = x.Substring(0, x.IndexOf("["));
                     }
 
-                    if (ast.UboNames.Contains(x))
+                    if (!ast.UboNames.Contains(x))
                     {
-                        ast.Ubos.Add(x);
-                        ast.Ubos.Add(ubo);
+                        ast.Ubos.Add((x, ubo));
                         ast.UboNames.Add(x);
                     }
                 }
@@ -694,11 +692,13 @@ public class ShaderGenerator : ISourceGenerator
                 {
                     var x = x_.Trim();
                     x = x.Substring(x.LastIndexOf(" ") + 1);
+
                     if (x.IndexOf("[") != -1)
                     {
                         // unfiorm array
                         x = x.Substring(0, x.IndexOf("["));
                     }
+
                     if (!ast.Uniforms.Contains(x))
                     {
                         ast.Uniforms.Add(x);
